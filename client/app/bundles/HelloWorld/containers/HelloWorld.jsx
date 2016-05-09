@@ -15,14 +15,16 @@ function select(state) {
 const HelloWorld = (props) => {
   const { dispatch, $$helloWorldStore } = props;
   const actions = bindActionCreators(helloWorldActionCreators, dispatch);
-  const { updateName } = actions;
+  const { updateName, updateMessage } = actions;
   const name = $$helloWorldStore.get('name');
+  const message = $$helloWorldStore.get('message');
 
   // This uses the ES2015 spread operator to pass properties as it is more DRY
   // This is equivalent to:
   // <HelloWorldWidget $$helloWorldStore={$$helloWorldStore} actions={actions} />
   return (
-    <HelloWorldWidget {...{ updateName, name }} />
+    <HelloWorldWidget {...{ updateName, updateMessage, name, message }} />
+    //<HelloWorldWidget $$helloWorldStore={$$helloWorldStore} actions={actions} />
   );
 };
 

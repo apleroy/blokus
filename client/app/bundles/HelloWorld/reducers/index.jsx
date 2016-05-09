@@ -5,9 +5,9 @@ import helloWorldReducer from './helloWorldReducer';
 import { $$initialState as $$helloWorldState } from './helloWorldReducer';
 
 export default {
-  $$helloWorldStore: helloWorldReducer,
+  $$helloWorldStore: helloWorldReducer
 };
 
 export const initialStates = {
-  $$helloWorldState,
+  $$helloWorldState
 };

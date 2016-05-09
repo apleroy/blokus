@@ -11,6 +11,8 @@ export default class HelloWorldWidget extends React.Component {
     // passing two properties: "data" and "actions".
     updateName: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
+    updateMessage: PropTypes.func.isRequired,
+    message: PropTypes.string.isRequired
   };
 
   constructor(props, context) {
@@ -19,22 +21,35 @@ export default class HelloWorldWidget extends React.Component {
     // Uses lodash to bind all methods to the context of the object instance, otherwise
     // the methods defined here would not refer to the component's class, not the component
     // instance itself.
-    _.bindAll(this, 'handleChange');
+    _.bindAll(this, 'changeName', 'changeMessage');//, 'changeMessage');
+    //_.bindAll(this, 'changeMessage');
   }
 
   // React will automatically provide us with the event `e`
-  handleChange(e) {
+  changeName(e) {
     const name = e.target.value;
     this.props.updateName(name);
+
+  }
+
+  changeMessage(e) {
+    console.log(e);
+    const message = e.target.value;
+    console.log(message);
+    this.props.updateMessage(message);
+
   }
 
   render() {
-    const { name } = this.props;
+    const { name, message } = this.props;
     return (
       <div className="container">
         <h3>
           Hello, {name}!
         </h3>
+        <h2>
+          This is the message: {message}.
+        </h2>
         <hr />
         <form className="form-horizontal">
           <label>
@@ -43,7 +58,17 @@ export default class HelloWorldWidget extends React.Component {
           <input
             type="text"
             value={name}
-            onChange={this.handleChange}
+            onChange={this.changeName}
+          />
+          </form>
+        <form className="form-horizontal">
+          <label>
+            Provide the message:
+          </label>
+          <input
+            type="text"
+            value={message}
+            onChange={this.changeMessage}
           />
         </form>
       </div>
