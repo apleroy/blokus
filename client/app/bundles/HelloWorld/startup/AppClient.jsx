@@ -10,7 +10,7 @@ import { getAllProducts } from '../actions/index.jsx'
 // This code here binds your smart component to the redux store.
 export default (props) => {
   const store = createStore(props);
-  store.dispatch(getAllProducts());
+
   const reactComponent = (
     <Provider store={store}>
       <App />

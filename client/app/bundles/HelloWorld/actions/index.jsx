@@ -9,6 +9,7 @@ function receiveProducts(products) {
 }
 
 export function getAllProducts() {
+    console.log("action dispatched for getallproducts");
     return dispatch => {
         shop.getProducts(products => {
             dispatch(receiveProducts(products))

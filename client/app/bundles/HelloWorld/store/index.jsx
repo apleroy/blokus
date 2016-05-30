@@ -12,7 +12,7 @@ import loggerMiddleware from 'lib/middlewares/loggerMiddleware';
 
 import shoppingCartApp from '../reducers/index.jsx';
 //import { initialStates } from '../reducers';
-
+import { getAllProducts } from '../actions/index.jsx'
 
 
 export default props => {
@@ -41,6 +41,8 @@ export default props => {
     shoppingCartApp,
     composedStore
   );
+
+  store.dispatch(getAllProducts());
 
 
 
