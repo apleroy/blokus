@@ -1,5 +1,11 @@
 import shop from '../api/shop.jsx'
 import * as types from '../constants/ActionTypes.jsx'
+import request from 'axios';
+//import metaTagsManager from './metaTagsManager';
+
+import fetch from 'isomorphic-fetch'
+
+const API_URL = 'products.json';
 
 function receiveProducts(products) {
     return {
@@ -8,14 +14,33 @@ function receiveProducts(products) {
     }
 }
 
-export function getAllProducts() {
-    console.log("action dispatched for getallproducts");
-    return dispatch => {
-        shop.getProducts(products => {
-            dispatch(receiveProducts(products))
-        })
+
+
+function requestProducts() {
+    return {
+        type: types.REQUEST_PRODUCTS
     }
 }
+
+export function getAllProducts() {
+    //return dispatch => {
+    //    shop.getProducts(products => {
+    //        dispatch(receiveProducts(products))
+    //    })
+    //}
+    //request.get('http://localhost:3000/products').then(
+    //    function(result) {
+    //        receiveProducts(result)
+    //    }
+    //);
+    return dispatch => {
+        dispatch(requestProducts())
+        return fetch('products.json')
+        .then(response => response.json())
+        .then(products => dispatch(receiveProducts(products)))
+    }
+}
+
 
 function addToCartUnsafe(productId) {
     return {

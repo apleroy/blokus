@@ -13,9 +13,6 @@ function products(state, action) {
 }
 
 function byId(state = {}, action) {
-    console.log("byId");
-    console.log(state);
-    console.log(action.products);
     switch (action.type) {
         case RECEIVE_PRODUCTS:
             return Object.assign({},

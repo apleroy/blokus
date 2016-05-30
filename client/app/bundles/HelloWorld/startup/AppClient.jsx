@@ -9,13 +9,15 @@ import { getAllProducts } from '../actions/index.jsx'
 // This is how you get props from the Rails view into the redux store.
 // This code here binds your smart component to the redux store.
 export default (props) => {
-  const store = createStore(props);
+    const store = createStore(props);
 
-  const reactComponent = (
+    store.dispatch(getAllProducts());
+
+    const reactComponent = (
     <Provider store={store}>
       <App />
     </Provider>
-  );
+    );
   return reactComponent;
 };
 
