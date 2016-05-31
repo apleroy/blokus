@@ -47,3 +47,5 @@ end
 
 gem 'react_on_rails', '~> 5'
 
+gem 'devise'
+

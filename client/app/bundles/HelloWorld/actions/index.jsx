@@ -2,6 +2,7 @@ import shop from '../api/shop.jsx'
 import * as types from '../constants/ActionTypes.jsx'
 import request from 'axios';
 //import metaTagsManager from './metaTagsManager';
+import requestManager from '../api/requestsManager.jsx';
 
 import fetch from 'isomorphic-fetch'
 
@@ -23,16 +24,6 @@ function requestProducts() {
 }
 
 export function getAllProducts() {
-    //return dispatch => {
-    //    shop.getProducts(products => {
-    //        dispatch(receiveProducts(products))
-    //    })
-    //}
-    //request.get('http://localhost:3000/products').then(
-    //    function(result) {
-    //        receiveProducts(result)
-    //    }
-    //);
     return dispatch => {
         dispatch(requestProducts())
         return fetch('products.json')

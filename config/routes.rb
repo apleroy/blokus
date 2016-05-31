@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :games
+  devise_for :users
   resources :products
   resources :comments
   get 'hello_world', to: 'hello_world#index'
