@@ -49,3 +49,5 @@ gem 'react_on_rails', '~> 5'
 
 gem 'devise'
 
+gem 'mongoid', '~> 5.1.0'
+
