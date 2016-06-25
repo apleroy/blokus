@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Product from './Product.jsx'
+import ProductForm from './ProductForm.jsx'
 
 export default class ProductItem extends Component {
     render() {

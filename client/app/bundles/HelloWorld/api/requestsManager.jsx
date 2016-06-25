@@ -11,15 +11,15 @@ export default {
    * @returns {Promise} - Result of ajax call.
    */
   fetchEntities() {
-    //return request.get(API_URL)
-    //    .then(function(response) {
-    //      receiveProducts(response);
-    //});
-    return request({
-      method: 'GET',
-      url: API_URL,
-      responseType: 'json',
+    return request.get(API_URL)
+        .then(function(response) {
+          receiveProducts(response);
     });
+    //return request({
+    //  method: 'GET',
+    //  url: API_URL,
+    //  responseType: 'json',
+    //});
 
   },
 
@@ -39,6 +39,6 @@ export default {
       },
       data: entity,
     });
-  },
+  }
 
 };

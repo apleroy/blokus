@@ -1,7 +1,7 @@
 import shop from '../api/shop.jsx'
 import * as types from '../constants/ActionTypes.jsx'
-import request from 'axios';
-//import metaTagsManager from './metaTagsManager';
+import axios from 'axios';
+import metaTagsManager from './metaTagsManager';
 import requestManager from '../api/requestsManager.jsx';
 
 import fetch from 'isomorphic-fetch'
@@ -15,8 +15,6 @@ function receiveProducts(products) {
     }
 }
 
-
-
 function requestProducts() {
     return {
         type: types.REQUEST_PRODUCTS
@@ -25,13 +23,13 @@ function requestProducts() {
 
 export function getAllProducts() {
     return dispatch => {
-        dispatch(requestProducts())
-        return fetch('products.json')
-        .then(response => response.json())
-        .then(products => dispatch(receiveProducts(products)))
+            dispatch(requestProducts())
+            return fetch('products.json')
+            .then(response => response.json())
+            .then(products => dispatch(receiveProducts(products)))
+
     }
 }
-
 
 function addToCartUnsafe(productId) {
     return {
@@ -65,3 +63,43 @@ export function checkout(products) {
         })
     }
 }
+
+// POSTS
+
+export function createProduct(props) {
+    //const request = axios.post(`${ROOT_URL}/posts`, props);
+    const request = axios({
+        method: 'post',
+        data: props,
+        url: `products`,
+        headers: {
+            'X-CSRF-Token': metaTagsManager.getCSRFToken()
+        },
+        //headers: {'Authorization': `Bearer ${tokenFromStorage}`}
+    });
+
+    return {
+        type: types.CREATE_PRODUCT,
+        payload: request
+    };
+}
+
+export function createProductSuccess(newPost) {
+    return {
+        type: types.CREATE_PRODUCT_SUCCESS,
+        payload: newProduct
+    };
+}
+
+export function createProductFailure(error) {
+    return {
+        type: types.CREATE_PRODUCT_FAILURE,
+        payload: error
+    };
+}
+
+export function resetNewPost() {
+    return {
+        type: RESET_NEW_POST
+    }
+};

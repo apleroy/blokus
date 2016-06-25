@@ -4,6 +4,7 @@ import { addToCart } from '../actions/index.jsx'
 import { getVisibleProducts } from '../reducers/products.jsx'
 import ProductItem from '../components/ProductItem.jsx'
 import ProductsList from '../components/ProductsList.jsx'
+import ProductForm from '../components/ProductForm.jsx'
 
 class ProductsContainer extends Component {
     render() {
@@ -17,6 +18,7 @@ class ProductsContainer extends Component {
                         onAddToCartClicked={() => this.props.addToCart(product.id)} />
                 )}
             </ProductsList>
+
         )
     }
 }
