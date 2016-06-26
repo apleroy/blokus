@@ -34,6 +34,11 @@ class GamesController < ApplicationController
         user_game_record = current_user.user_games.build(game_id: @game.id)
         user_game_record.save
 
+        board = Board.create(game_id: @game.id)
+
+        board.moves.create(user_id: current_user.id, piece_id: 2, squares: ['A1','A2','A12'])
+
+
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
