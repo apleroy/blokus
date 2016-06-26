@@ -13,7 +13,7 @@ export default class App extends Component {
                 <hr/>
                 <CartContainer />
                 <hr/>
-
+                <ProductFormContainer />
             </div>
         )
     }

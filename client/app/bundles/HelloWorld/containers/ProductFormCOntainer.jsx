@@ -1,40 +1,29 @@
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import ProductForm from '../components/ProductForm.jsx';
 import {createProduct, createProductSuccess, createProductFailure} from '../actions/index.jsx';
 import {reduxForm} from 'redux-form';
 
+class ProductFormContainer extends Component {
 
-//For any field errors upon submission (i.e. not instant check)
-const createNewProduct = (values, dispatch) => {
+    render() {
+        //const { products, total } = this.props
 
-    return new Promise((resolve, reject) => {
-        dispatch(createProduct(values, token))
-            .then((response) => {
-                let data = response.payload.data;
-                //if any one of these exist, then there is a field error
-                if (response.payload.status != 200) {
-                    //let other components know of error by updating the redux` state
-                    dispatch(createProductFailure(response.payload));
-                    reject(data); //this is for redux-form itself
-                } else {
-                    //let other components know that everything is fine by updating the redux` state
-                    dispatch(createProductSuccess(response.payload));
-                    resolve(); //this is for redux-form itself
-                }
-            });
-
-    });
-};
-
-
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        createProduct: createNewProduct
-
+        return (
+            <ProductForm />
+        )
     }
+
 }
 
-
+//const mapDispatchToProps = (dispatch) => {
+//    return {
+//        createProduct: createNewProduct
+//
+//    }
+//}
+//
+//
 function mapStateToProps(state) {
     return {
         newProduct: state.products.newProduct
@@ -50,7 +39,7 @@ function mapStateToProps(state) {
 //    asyncBlurFields: ['title']
 //}, mapStateToProps, mapDispatchToProps)(ProductForm);
 
-export default (
-    mapStateToProps, mapDispatchToProps
+export default connect (
+    mapStateToProps
 
-)(ProductForm)
+)(ProductFormContainer)

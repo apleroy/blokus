@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = current_user.games
   end
 
   # GET /games/1
@@ -26,8 +26,14 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
 
+
     respond_to do |format|
       if @game.save
+
+        #create join record in user_workout
+        user_game_record = current_user.user_games.build(game_id: @game.id)
+        user_game_record.save
+
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else

@@ -15,7 +15,7 @@ export default (props) => {
     var product = {title: "Andy100", price: 99.99, inventory: 50};
 
     store.dispatch(getAllProducts());
-    store.dispatch(createProduct(product));
+    //store.dispatch(createProduct(product));
 
     const reactComponent = (
     <Provider store={store}>
