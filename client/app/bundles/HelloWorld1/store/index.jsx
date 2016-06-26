@@ -10,7 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 // You'd want to disable this for production.
 import loggerMiddleware from 'lib/middlewares/loggerMiddleware';
 
-import boardApp from '../reducers/index.jsx';
+import shoppingCartApp from '../reducers/index.jsx';
 
 
 export default props => {
@@ -20,7 +20,7 @@ export default props => {
   );
 
   const store = createStore(
-    boardApp,
+    shoppingCartApp,
     composedStore
   );
 
