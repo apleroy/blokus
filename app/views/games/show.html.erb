@@ -16,3 +16,12 @@
 
 <p>This is where the Mongo board will go</p>
 <p>Need to render the Redux React App here</p>
+
+<p>Game's Board ID: <%= @game.board.id %></p>
+
+<% @game.board.moves.each do |move| %>
+  <p>Piece_ID: <%= move.piece_id %></p>
+  <% move.squares.each do |square| %>
+    <p>Square: <%= square %></p>
+  <% end %>
+<% end %>
