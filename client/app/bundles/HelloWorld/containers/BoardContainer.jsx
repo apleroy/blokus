@@ -7,9 +7,9 @@ import Board from '../components/Board.jsx'
 
 class BoardContainer extends Component {
     render() {
-        //const { board } = this.props
+        const { board } = this.props
         return (
-            <Board />
+            <Board/>
                 //{products.map(product =>
                 //    <ProductItem
                 //        key={product.id}

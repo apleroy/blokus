@@ -14,7 +14,9 @@ export default (props) => {
 
     var product = {title: "Andy100", price: 99.99, inventory: 50};
 
+    console.log("store before dispatch:" + store);
     store.dispatch(getAllProducts());
+    console.log("store after dispatch: " + store);
     //store.dispatch(createProduct(product));
 
     const reactComponent = (

@@ -4,7 +4,12 @@ class MovesController < ApplicationController
   # GET /moves
   # GET /moves.json
   def index
-    @moves = Move.all
+    #@moves = Move.all
+    @board = Board.where(game_id: 42)
+    #puts "Andy"
+    #puts @board.to_a
+    #@moves = Move.all
+    @moves = Move.where(game_id: 42)
   end
 
   # GET /moves/1

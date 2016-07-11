@@ -51,3 +51,7 @@ gem 'devise'
 
 gem 'mongoid', '~> 5.1.0'
 
+gem 'twitter-bootstrap-rails'
+
+gem 'therubyracer'
+gem 'less-rails'

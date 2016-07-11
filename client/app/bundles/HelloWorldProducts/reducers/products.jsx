@@ -15,7 +15,7 @@ function products(state, action) {
 function byId(state = {}, action) {
     switch (action.type) {
         case RECEIVE_PRODUCTS:
-            console.log(action.products);
+            //console.log(action.products);
 
             return Object.assign({},
                 state,

@@ -6,28 +6,52 @@ import requestManager from '../api/requestsManager.jsx';
 
 import fetch from 'isomorphic-fetch'
 
-function requestBoard(game_id) {
+//function requestBoard(game_id) {
+//    return {
+//        type: types.REQUEST_BOARD,
+//        game_id: game_id
+//    }
+//}
+//
+//function receiveBoard(board) {
+//    return {
+//        type: types.RECEIVE_BOARD,
+//        board: board
+//    }
+//}
+//
+//export function getBoard(game_id) {
+//    return dispatch => {
+//        dispatch(requestBoard(game_id))
+//        return fetch (game_id)
+//        .then(response => response.json())
+//        .then(board => dispatch(receiveBoard(board)))
+//    }
+//}
+
+function receiveMoves(moves) {
     return {
-        type: types.REQUEST_BOARD,
-        game_id: game_id
+        type: types.RECEIVE_MOVES,
+        moves: moves.moves
     }
 }
 
-function receiveBoard(board) {
+function requestMoves() {
     return {
-        type: types.RECEIVE_BOARD,
-        board: board
+        type: types.REQUEST_MOVES
     }
 }
 
-export function getBoard(game_id) {
+export function getAllMoves(game_id) {
     return dispatch => {
-        dispatch(requestBoard(game_id))
-        return fetch ('games/' + game_id)
-        .then(response => response.json())
-        .then(board => dispatch(receiveBoard(board)))
+        dispatch(requestMoves())
+        return fetch(game_id + '/board.json')
+            .then(response => response.json())
+            .then(moves => dispatch(receiveMoves(moves)))
+
     }
 }
+
 
 //const API_URL = 'products.json';
 //

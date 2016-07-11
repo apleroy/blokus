@@ -12,7 +12,7 @@ import { RECEIVE_BOARD } from '../constants/ActionTypes.jsx'
 function byId(state = {}, action) {
     switch (action.type) {
         case RECEIVE_BOARD:
-            console.log(action.board);
+
 
             return Object.assign({},
                 state,
@@ -38,6 +38,8 @@ export default combineReducers({
 })
 
 export function getBoard(state, id) {
+    console.log("state:" + state);
+    console.log("id:" + id);
     return state.byId[id]
 }
 

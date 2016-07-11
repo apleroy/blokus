@@ -13,6 +13,7 @@
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>
 
+<p class="lead">Bootstrap text</p>
 
 <p>This is where the Mongo board will go</p>
 <p>Need to render the Redux React App here</p>
@@ -26,4 +27,7 @@
   <% end %>
 <% end %>
 
-<%= react_component("App") %>
+<div class="board">
+<%= react_component("App", props: {game_id: @game.id}) %>
+
+</div>

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import createStore from '../store/index.jsx';
 import App from '../containers/App.jsx';
-import { getBoard } from '../actions/index.jsx'
+import { getAllMoves } from '../actions/index.jsx'
 
 
 // See documentation for https://github.com/reactjs/react-redux.
@@ -12,10 +12,15 @@ import { getBoard } from '../actions/index.jsx'
 export default (props) => {
     const store = createStore(props);
 
+    console.log("props:" + props.game_id);
+
     //var product = {title: "Andy100", price: 99.99, inventory: 50};
 
-    store.dispatch(getBoard(2));
+    //console.log("initial state:" + store.getState());
+    //store.dispatch(getBoard(props.game_id));
+    //console.log("initial state after dispatch:" + store.getState());
     //store.dispatch(createProduct(product));
+    store.dispatch(getAllMoves(props.game_id));
 
     const reactComponent = (
     <Provider store={store}>

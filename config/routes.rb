@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  resources :moves
+
   root 'static_pages#home'
 
-  resources :games
+  resources :games do
+    resource :board
+
+  end
   devise_for :users
   resources :products
   resources :comments
+
+  #resources :boards
   get 'hello_world', to: 'hello_world#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

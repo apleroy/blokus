@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Boards</h1>
+
+
+    <% @boards.each do |board| %>
+
+        <div><%= board.game_id %></div>
+        <%= board.moves.each do | move| %>
+        <div>
+          <%= move.id %> |
+          <%= move.user_id %> |
+          <%= move.piece_id %> |
+          <%= move.squares.each do |square| %>
+            <%= square %> |
+          <% end %>
+        </div>
+        <% end %>
+    <br/>
+    <br/>
+    <% end %>
+
+
+

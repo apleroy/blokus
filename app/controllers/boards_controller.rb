@@ -10,6 +10,7 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.json
   def show
+
   end
 
   # GET /boards/new
@@ -64,7 +65,7 @@ class BoardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board
-      @board = Board.find(params[:id])
+      @board = Board.where(game_id: params[:game_id]).first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

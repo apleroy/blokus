@@ -1,15 +1,35 @@
 import React, { Component, PropTypes } from 'react'
+import Square from './Square.jsx'
 
-export default class Board extends Component {
+class Board extends Component {
+
     render() {
-        const { game_id, pieces, title } = this.props
+        //const { game_id, pieces, title } = this.props
+        var X_DIM = 20;
+        var Y_DIM = 20;
 
-        return <div>APL -  {game_id} -{title} - {pieces} </div>
+        var board = new Array(X_DIM);
+        for (var i = 0; i < X_DIM; i++) {
+            board[i] = new Array(Y_DIM);
+        }
+
+        for (var x = 0; x < X_DIM; x++) {
+            for (var y = 0; y < Y_DIM; y++) {
+                board[x][y] = <Square x={x} y={y}/>;
+            }
+        }
+        return (
+            <div>
+                <h1>
+                    THis is the board
+                </h1>
+                <div>{board}</div>
+            </div>
+
+
+        )
     }
 }
 
-Board.propTypes = {
-    game_id: PropTypes.number,
-    title: PropTypes.string,
-    pieces: PropTypes.string
-}
+export default Board
+

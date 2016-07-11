@@ -36,7 +36,7 @@ class GamesController < ApplicationController
 
         board = Board.create(game_id: @game.id)
 
-        board.moves.create(user_id: current_user.id, piece_id: 2, squares: ['A1','A2','A12'])
+        board.moves.create(user_id: current_user.id, piece_id: 2, squares: ['1_1','2_2','3_12'])
 
 
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
