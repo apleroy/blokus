@@ -10,6 +10,7 @@ import { default as moves, getMove } from './moves.jsx'
 
 
 
+
 const BlokusApp = combineReducers({
   moves
 })

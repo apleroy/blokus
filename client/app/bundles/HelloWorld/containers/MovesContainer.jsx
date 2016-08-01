@@ -3,19 +3,23 @@ import { connect } from 'react-redux'
 import { getVisibleMoves } from '../reducers/moves.jsx'
 import MoveItem from '../components/MoveItem.jsx'
 import MovesList from '../components/MovesList.jsx'
+import Board from '../components/Board.jsx'
 
 class MovesContainer extends Component {
     render() {
-        const { moves } = this.props
+        const { squares, moves } = this.props
         return (
-            <MovesList title="Moves">
-                {moves.map(move =>
-                    <MoveItem
-                        key={move.id}
-                        move={move}
-                        />
-                )}
-            </MovesList>
+
+                <MovesList title="Moves">
+                    {moves.map(move =>
+                        <MoveItem
+                            key={move.id}
+                            move={move}
+                            />
+                    )}
+                    <Board  />
+                </MovesList>
+
 
         )
     }
@@ -33,7 +37,8 @@ class MovesContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        moves: getVisibleMoves(state.moves)
+        moves: getVisibleMoves(state.moves)//,
+        //squares: createSquares(state.squares)
     }
 }
 

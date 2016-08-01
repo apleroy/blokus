@@ -33,3 +33,6 @@ export const REQUEST_MOVES = 'REQUEST_MOVES';
 export const RECEIVE_MOVES = 'RECEIVE_MOVES';
 
 
+export const BUILD_BOARD = 'BUILD_BOARD';
+
+

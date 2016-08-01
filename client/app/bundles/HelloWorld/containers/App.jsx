@@ -9,7 +9,6 @@ export default class App extends Component {
                 <h2>Board</h2>
                 <hr/>
                 <MovesContainer />
-                <Board />
 
             </div>
         )

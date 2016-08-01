@@ -6,28 +6,49 @@ import requestManager from '../api/requestsManager.jsx';
 
 import fetch from 'isomorphic-fetch'
 
-//function requestBoard(game_id) {
-//    return {
-//        type: types.REQUEST_BOARD,
-//        game_id: game_id
-//    }
-//}
-//
-//function receiveBoard(board) {
-//    return {
-//        type: types.RECEIVE_BOARD,
-//        board: board
-//    }
-//}
-//
-//export function getBoard(game_id) {
-//    return dispatch => {
-//        dispatch(requestBoard(game_id))
-//        return fetch (game_id)
-//        .then(response => response.json())
-//        .then(board => dispatch(receiveBoard(board)))
-//    }
-//}
+function requestBoard(game_id) {
+    return {
+        type: types.REQUEST_BOARD,
+        game_id: game_id
+    }
+}
+
+function receiveBoard(board) {
+    return {
+        type: types.RECEIVE_BOARD,
+        board: board
+    }
+}
+
+export function getBoard(game_id) {
+    return dispatch => {
+        dispatch(requestBoard(game_id))
+        return fetch(game_id + '/board.json')
+            .then(response => response.json())
+            .then(board => dispatch(receiveBoard(board)))
+    }
+}
+
+export function buildBoard() {
+    var X_DIM = 20;
+    var Y_DIM = 20;
+
+    var board = new Array(X_DIM);
+    for (var i = 0; i < X_DIM; i++) {
+        board[i] = new Array(Y_DIM);
+    }
+
+    for (var x = 0; x < X_DIM; x++) {
+        for (var y = 0; y < Y_DIM; y++) {
+            board[x][y] = "EMPTY";//<Square x={x} y={y}/>;
+        }
+    }
+
+    return {
+        type: types.BUILD_BOARD,
+        board: board
+    }
+}
 
 function receiveMoves(moves) {
     return {
@@ -51,6 +72,8 @@ export function getAllMoves(game_id) {
 
     }
 }
+
+
 
 
 //const API_URL = 'products.json';

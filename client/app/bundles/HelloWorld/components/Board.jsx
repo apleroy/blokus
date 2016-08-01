@@ -3,8 +3,10 @@ import Square from './Square.jsx'
 
 class Board extends Component {
 
+
     render() {
-        //const { game_id, pieces, title } = this.props
+        const { moves } = this.props;
+
         var X_DIM = 20;
         var Y_DIM = 20;
 
@@ -21,8 +23,9 @@ class Board extends Component {
         return (
             <div>
                 <h1>
-                    THis is the board
+                    This is the board - moves {moves}
                 </h1>
+
                 <div>{board}</div>
             </div>
 
