@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import MovesContainer from './MovesContainer.jsx'
+import BoardContainer from './BoardContainer.jsx'
 import Board from '../components/Board.jsx'
+import Piece_1 from '../components/Piece_1.jsx'
 
 export default class App extends Component {
     render() {
@@ -8,7 +9,8 @@ export default class App extends Component {
             <div>
                 <h2>Board</h2>
                 <hr/>
-                <MovesContainer />
+                <Piece_1 />
+                <BoardContainer />
 
             </div>
         )

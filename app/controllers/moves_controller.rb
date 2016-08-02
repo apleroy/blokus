@@ -1,15 +1,16 @@
 class MovesController < ApplicationController
+  protect_from_forgery except: :create
   before_action :set_move, only: [:show, :edit, :update, :destroy]
 
   # GET /moves
   # GET /moves.json
   def index
     #@moves = Move.all
-    @board = Board.where(game_id: 42)
+    @board = Board.where(game_id: 44).first
     #puts "Andy"
     #puts @board.to_a
-    #@moves = Move.all
-    @moves = Move.where(game_id: 42)
+    @moves = @board.moves
+    #@moves = Move.where(game_id: 44)
   end
 
   # GET /moves/1
@@ -29,6 +30,16 @@ class MovesController < ApplicationController
   # POST /moves
   # POST /moves.json
   def create
+    #
+    #Mongoid::Errors::NoParent (
+    #                              22:53:43 web.1    | message:
+    #    22:53:43 web.1    |   Cannot persist embedded document Move without a parent document.
+   #     22:53:43 web.1    | summary:
+  #      22:53:43 web.1    |   If the document is embedded, in order to be persisted it must always have a reference to its parent document. This is most likely caused by either calling Move.create or Move.create! without setting the parent document as an attribute.
+ #       22:53:43 web.1    | resolution:
+#        22:53:43 web.1    |   Ensure that you've set the parent relation if instantiating the embedded document directly, or always create new embedded documents via the parent relation.)
+#
+    @move[:squares] = params[:move][:squares].split(',')
     @move = Move.new(move_params)
 
     respond_to do |format|

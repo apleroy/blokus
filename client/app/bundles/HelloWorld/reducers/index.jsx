@@ -5,7 +5,7 @@
 
 import { combineReducers } from 'redux'
 import { default as cart, getQuantity, getAddedIds } from './cart.jsx'
-import { default as moves, getMove } from './moves.jsx'
+import moves from './moves.jsx'
 
 
 

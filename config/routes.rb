@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :games do
     resource :board
-
+    resources :moves
   end
   devise_for :users
   resources :products

@@ -6,49 +6,6 @@ import requestManager from '../api/requestsManager.jsx';
 
 import fetch from 'isomorphic-fetch'
 
-function requestBoard(game_id) {
-    return {
-        type: types.REQUEST_BOARD,
-        game_id: game_id
-    }
-}
-
-function receiveBoard(board) {
-    return {
-        type: types.RECEIVE_BOARD,
-        board: board
-    }
-}
-
-export function getBoard(game_id) {
-    return dispatch => {
-        dispatch(requestBoard(game_id))
-        return fetch(game_id + '/board.json')
-            .then(response => response.json())
-            .then(board => dispatch(receiveBoard(board)))
-    }
-}
-
-export function buildBoard() {
-    var X_DIM = 20;
-    var Y_DIM = 20;
-
-    var board = new Array(X_DIM);
-    for (var i = 0; i < X_DIM; i++) {
-        board[i] = new Array(Y_DIM);
-    }
-
-    for (var x = 0; x < X_DIM; x++) {
-        for (var y = 0; y < Y_DIM; y++) {
-            board[x][y] = "EMPTY";//<Square x={x} y={y}/>;
-        }
-    }
-
-    return {
-        type: types.BUILD_BOARD,
-        board: board
-    }
-}
 
 function receiveMoves(moves) {
     return {
@@ -73,7 +30,43 @@ export function getAllMoves(game_id) {
     }
 }
 
+function updateBoard(move) {
+    console.log("Update move: " + move)
+    return {
+        type: types.UPDATE_BOARD,
+        move: move
+    }
+}
 
+export default function createMove(move) {
+    console.log("new move: " + move.toString());
+
+        console.log("in dispatch");
+
+    //const request = axios({
+    //    method: 'post',
+    //    data: move,
+    //    url: `44/moves`,
+    //    headers: {
+    //        'X-CSRF-Token': metaTagsManager.getCSRFToken()
+    //    }
+    //    //headers: {'Authorization': `Bearer ${tokenFromStorage}`}
+    //});
+    //    return request
+    //        .then(response => response.json())
+    //        .then(moves => dispatch(receiveMoves(moves)))
+
+    //Value of type Fixnum cannot be written to a field of type Array
+    axios.post('44/moves', {
+        user_id: '2',
+        squares: move
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+
+
+}
 
 
 //const API_URL = 'products.json';

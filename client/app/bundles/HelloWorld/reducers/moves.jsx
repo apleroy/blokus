@@ -1,75 +1,62 @@
 import { combineReducers } from 'redux'
-import { RECEIVE_MOVES } from '../constants/ActionTypes.jsx'
+import { RECEIVE_MOVES, UPDATE_BOARD } from '../constants/ActionTypes.jsx'
 
 var X_DIM = 20;
 var Y_DIM = 20;
 
-var board = new Array(X_DIM);
+var squares = new Array(X_DIM);
 for (var i = 0; i < X_DIM; i++) {
-    board[i] = new Array(Y_DIM);
+    squares[i] = new Array(Y_DIM);
 }
 
 for (var x = 0; x < X_DIM; x++) {
     for (var y = 0; y < Y_DIM; y++) {
-        board[x][y] = "EMPTY";//<Square x={x} y={y}/>;
+        squares[x][y] = "E";
     }
 }
 
 const initialState = {
-    moves: [],
-    board: board
+    moves: '',
+    squares: squares
 }
 
-function moves(state, action) {
-    switch (action.type) {
 
-        default:
-            return state
-    }
-}
-
-function byId(state = {}, action) {
+export default function reducer (state = initialState, action) {
     switch (action.type) {
         case RECEIVE_MOVES:
-            console.log(action.moves);
 
-            return Object.assign({},
-                state,
-                action.moves.reduce((obj, move) => {
-                    obj[move.id] = move
-                    return obj
-                }, {})
-            )
-        default:
-            const { moveId } = action
-            if (moveId) {
-                return Object.assign({}, state, {
-                    [moveId]: moves(state[moveId], action)
-                })
+            for(var i = 0; i < action.moves.length; i++) {
+                var move = action.moves[i];
+                console.log(move.squares);
+                console.log(move.squares[0]);
+                var user_id = move.user_id;
+                var piece_id = move.piece_id;
+
+                for (var s = 0; s < move.squares.length; s++) {
+                    var square = move.squares[s];
+                    var x = square.split('_')[0];
+                    var y = square.split('_')[1];
+                    console.log("X: " + x + " Y: " + y);
+                    squares[x][y] = "ANDY";
+                }
             }
-            return state
-    }
-}
 
-function visibleIds(state = [], action) {
-//function visibleIds(state = initialState, action) {
-    switch (action.type) {
-        case RECEIVE_MOVES:
-            return action.moves.map(move => move.id)
+            return {
+                ...initialState,
+                moves: action.moves,
+                squares: squares
+            }
+
+        case UPDATE_BOARD:
+            console.log("reducer for update board")
+
+            return {
+                ...initialState,
+                moves: moves.push(action.move)
+            }
+
         default:
             return state
     }
 }
 
-export default combineReducers({
-    byId,
-    visibleIds
-})
-
-export function getMove(state, id) {
-    return state.byId[id]
-}
-
-export function getVisibleMoves(state) {
-    return state.visibleIds.map(id => getMove(state, id))
-}

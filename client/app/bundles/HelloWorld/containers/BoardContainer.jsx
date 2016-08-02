@@ -1,25 +1,27 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { getVisibleMoves } from '../reducers/moves.jsx'
+import moves  from '../reducers/moves.jsx'
 import MoveItem from '../components/MoveItem.jsx'
 import MovesList from '../components/MovesList.jsx'
 import Board from '../components/Board.jsx'
 
-class MovesContainer extends Component {
+class BoardContainer extends Component {
     render() {
-        const { squares, moves } = this.props
+
+        const { moves } = this.props
+        console.log(moves);
         return (
 
-                <MovesList title="Moves">
-                    {moves.map(move =>
-                        <MoveItem
-                            key={move.id}
-                            move={move}
-                            />
-                    )}
-                    <Board  />
-                </MovesList>
-
+                //<MovesList title="Moves">
+                //    {moves.map(move =>
+                //        <MoveItem
+                //            key={move.id}
+                //            move={move}
+                //            />
+                //    )}
+                //
+                //</MovesList>
+                <Board squares={moves.squares} moves={moves.moves} />
 
         )
     }
@@ -36,12 +38,12 @@ class MovesContainer extends Component {
 //}
 
 function mapStateToProps(state) {
+    //console.log(JSON.stringify(state))
     return {
-        moves: getVisibleMoves(state.moves)//,
-        //squares: createSquares(state.squares)
+        moves: state.moves
     }
 }
 
 export default connect(
     mapStateToProps
-)(MovesContainer)
+)(BoardContainer)
