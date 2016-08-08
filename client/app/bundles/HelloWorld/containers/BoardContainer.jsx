@@ -4,8 +4,15 @@ import moves  from '../reducers/moves.jsx'
 import MoveItem from '../components/MoveItem.jsx'
 import MovesList from '../components/MovesList.jsx'
 import Board from '../components/Board.jsx'
+import createMove from '../actions/index.jsx'
 
 class BoardContainer extends Component {
+
+    //componentDidMount() {
+    //    let {
+    //        dispatch = this.props
+    //    }
+    //}
     render() {
 
         const { moves } = this.props
@@ -44,6 +51,16 @@ function mapStateToProps(state) {
     }
 }
 
+//const mapDispatchToProps = (dispatch) => {
+//    return {
+//        onClick: (move) => {
+//            dispatch(createMove(move))
+//        }
+//    }
+//}
+
+
 export default connect(
     mapStateToProps
+    //mapDispatchToProps
 )(BoardContainer)

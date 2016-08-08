@@ -7,4 +7,12 @@ class Move
   field :squares, type: Array
 
   embedded_in :board
+
+  def empty?
+  end
+
+  def each_pair
+
+  end
+
 end

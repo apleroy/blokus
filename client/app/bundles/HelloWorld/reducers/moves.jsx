@@ -22,8 +22,11 @@ const initialState = {
 
 
 export default function reducer (state = initialState, action) {
+    console.log("in reducer");
     switch (action.type) {
         case RECEIVE_MOVES:
+
+            console.log("receive_moves:" + action.type)
 
             for(var i = 0; i < action.moves.length; i++) {
                 var move = action.moves[i];

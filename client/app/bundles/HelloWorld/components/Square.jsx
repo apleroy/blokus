@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import createMove from '../actions/index.jsx'
+import { connect} from 'react-redux'
+
+
 
 
 class Square extends Component {
@@ -14,7 +17,7 @@ class Square extends Component {
 
     render() {
 
-        const { x, y } = this.props
+        const { x, y, dispatch} = this.props
         return (
             <div className="squareOuter col-sm-1">
                 <div className="squareInner" onClick={this.clickedSquare.bind(this)}>
@@ -23,6 +26,15 @@ class Square extends Component {
             </div>
         )
     }
+
+
 }
+
+
+//function mapDispatchToProps(dispatch) {
+//    return {
+//        onClick: () => dispatch(clickedSquare())
+//    };
+//}
 
 export default Square

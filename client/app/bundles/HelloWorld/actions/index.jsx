@@ -8,9 +8,10 @@ import fetch from 'isomorphic-fetch'
 
 
 function receiveMoves(moves) {
+    console.log("receive moves: " + moves);
     return {
         type: types.RECEIVE_MOVES,
-        moves: moves.moves
+        moves: moves//.moves
     }
 }
 
@@ -22,10 +23,11 @@ function requestMoves() {
 
 export function getAllMoves(game_id) {
     return dispatch => {
+        console.log("in dispatch");
         dispatch(requestMoves())
         return fetch(game_id + '/board.json')
             .then(response => response.json())
-            .then(moves => dispatch(receiveMoves(moves)))
+            .then(moves => dispatch(receiveMoves(moves.moves)))
 
     }
 }
@@ -41,30 +43,24 @@ function updateBoard(move) {
 export default function createMove(move) {
     console.log("new move: " + move.toString());
 
+
+    //return dispatch => {
+
         console.log("in dispatch");
+        axios.post('44/moves', {
+                user_id: '2',
+                squares: move
+            })
 
-    //const request = axios({
-    //    method: 'post',
-    //    data: move,
-    //    url: `44/moves`,
-    //    headers: {
-    //        'X-CSRF-Token': metaTagsManager.getCSRFToken()
-    //    }
-    //    //headers: {'Authorization': `Bearer ${tokenFromStorage}`}
-    //});
-    //    return request
-    //        .then(response => response.json())
-    //        .then(moves => dispatch(receiveMoves(moves)))
+            //.then(response => response.json())
 
-    //Value of type Fixnum cannot be written to a field of type Array
-    axios.post('44/moves', {
-        user_id: '2',
-        squares: move
-        })
+            //.then(moves => dispatch(receiveMoves(moves)))
         .then(function (response) {
             console.log(response);
+            receiveMoves(response.data)
         })
 
+    //}
 
 }
 

@@ -30,27 +30,37 @@ class MovesController < ApplicationController
   # POST /moves
   # POST /moves.json
   def create
-    #
-    #Mongoid::Errors::NoParent (
-    #                              22:53:43 web.1    | message:
-    #    22:53:43 web.1    |   Cannot persist embedded document Move without a parent document.
-   #     22:53:43 web.1    | summary:
-  #      22:53:43 web.1    |   If the document is embedded, in order to be persisted it must always have a reference to its parent document. This is most likely caused by either calling Move.create or Move.create! without setting the parent document as an attribute.
- #       22:53:43 web.1    | resolution:
-#        22:53:43 web.1    |   Ensure that you've set the parent relation if instantiating the embedded document directly, or always create new embedded documents via the parent relation.)
-#
-    @move[:squares] = params[:move][:squares].split(',')
+    @board = Board.where(game_id: 44).first
+    puts "here"
     @move = Move.new(move_params)
+    puts @move
+    puts params[:move][:squares]
+    puts "after"
 
-    respond_to do |format|
-      if @move.save
-        format.html { redirect_to @move, notice: 'Move was successfully created.' }
-        format.json { render :show, status: :created, location: @move }
+    #@move.squares = []
+    #@move.squares.push(params[:move][:squares].split(','))
+
+
+    puts @move.squares
+    @move.created_at = Date.new
+    @move.piece_id = 9
+    puts @move.inspect
+
+
+
+    puts "after build"
+    puts @board.moves
+
+    #respond_to do |format|
+      if @board.moves.create(move_params)
+        render json: @board.moves
+        #flash[:notice] = 'Move was successfully created.'
+
       else
         format.html { render :new }
         format.json { render json: @move.errors, status: :unprocessable_entity }
       end
-    end
+    #end
   end
 
   # PATCH/PUT /moves/1
@@ -85,6 +95,6 @@ class MovesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def move_params
-      params.require(:move).permit(:user_id, :game_id, :piece_id, :squares)
+      params.require(:move).permit(:user_id, :game_id, :piece_id, {:squares => []})
     end
 end
