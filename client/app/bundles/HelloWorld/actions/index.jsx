@@ -40,14 +40,14 @@ function updateBoard(move) {
     }
 }
 
-export default function createMove(move) {
+export function createMove(move) {
     console.log("new move: " + move.toString());
 
 
-    //return dispatch => {
+    return dispatch => {
 
         console.log("in dispatch");
-        axios.post('44/moves', {
+        axios.post('47/moves', {
                 user_id: '2',
                 squares: move
             })
@@ -57,10 +57,13 @@ export default function createMove(move) {
             //.then(moves => dispatch(receiveMoves(moves)))
         .then(function (response) {
             console.log(response);
-            receiveMoves(response.data)
+        //    receiveMoves(response.data)
+            dispatch(receiveMoves(response.data))
         })
+        //.then(response => response.json())
 
-    //}
+
+    }
 
 }
 

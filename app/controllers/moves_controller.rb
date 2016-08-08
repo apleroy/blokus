@@ -30,7 +30,7 @@ class MovesController < ApplicationController
   # POST /moves
   # POST /moves.json
   def create
-    @board = Board.where(game_id: 44).first
+    @board = Board.where(game_id: 47).first
     puts "here"
     @move = Move.new(move_params)
     puts @move

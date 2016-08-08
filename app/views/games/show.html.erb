@@ -22,9 +22,9 @@
 
 <% @game.board.moves.each do |move| %>
   <p>Piece_ID: <%= move.piece_id %></p>
-  <% move.squares.each do |square| %>
-    <p>Square: <%= square %></p>
-  <% end %>
+  <%# move.squares.each do |square| %>
+    <p>Square: <%#= square %></p>
+  <%# end %>
 <% end %>
 
 <div class="board">

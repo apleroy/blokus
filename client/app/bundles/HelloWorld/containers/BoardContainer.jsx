@@ -4,6 +4,7 @@ import moves  from '../reducers/moves.jsx'
 import MoveItem from '../components/MoveItem.jsx'
 import MovesList from '../components/MovesList.jsx'
 import Board from '../components/Board.jsx'
+import Square from '../components/Square.jsx'
 import createMove from '../actions/index.jsx'
 
 class BoardContainer extends Component {
@@ -15,8 +16,9 @@ class BoardContainer extends Component {
     //}
     render() {
 
-        const { moves } = this.props
-        console.log(moves);
+        const { moves, dispatch } = this.props
+        console.log("in board container: " + moves);
+        console.log("in board container: " + moves.squares);
         return (
 
                 //<MovesList title="Moves">
@@ -28,8 +30,20 @@ class BoardContainer extends Component {
                 //    )}
                 //
                 //</MovesList>
-                <Board squares={moves.squares} moves={moves.moves} />
+                //<Board  />
+                <Board squares={moves.squares} moves={moves.moves} dispatch={dispatch}>
 
+                </Board>
+//moves.squares.map(square =>
+            //
+            //    <Square
+            //        key={square.id}
+            //        square={square}
+            //        x={square.x}
+            //        y={square.y}
+            //        onSquareClicked={() => this.props.createMove(square.x + "_" + square.y)}
+            //    />
+            //)
         )
     }
 }
@@ -51,16 +65,17 @@ function mapStateToProps(state) {
     }
 }
 
-//const mapDispatchToProps = (dispatch) => {
-//    return {
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatch: dispatch
 //        onClick: (move) => {
 //            dispatch(createMove(move))
 //        }
-//    }
-//}
+    }
+}
 
 
 export default connect(
-    mapStateToProps
-    //mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(BoardContainer)
