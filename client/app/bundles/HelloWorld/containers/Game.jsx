@@ -11,7 +11,7 @@ import createMove from '../actions/index.jsx'
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-class BoardContainer extends Component {
+class Game extends Component {
 
     //componentDidMount() {
     //    let {
@@ -20,13 +20,17 @@ class BoardContainer extends Component {
     //}
     render() {
 
-        const { moves, dispatch } = this.props
-        console.log("in board container: " + moves);
-        console.log("in board container: " + moves.squares);
+        const { dispatch } = this.props
+
         return (
 
 
-                <Board squares={moves.squares} moves={moves.moves} dispatch={dispatch} />
+            <div>
+                Top Level Game Container <br/>
+                {this.props.children}
+            </div>
+
+
 
         )
     }
@@ -62,4 +66,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(BoardContainer)
+)(DragDropContext(HTML5Backend)(Game))

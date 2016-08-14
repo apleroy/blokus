@@ -7,7 +7,6 @@ class Board extends Component {
     render() {
 
         const { squares, moves, dispatch } = this.props;
-        console.log(moves)
 
 
         for (var x = 0; x < squares.length; x++) {
@@ -27,6 +26,7 @@ class Board extends Component {
                 <h1>
                     This is the board
                 </h1>
+
 
              <div>{squares}</div>
             </div>

@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import * as actions from '../actions/index.jsx'
 import { connect} from 'react-redux'
+import { DropTarget } from 'react-dnd';
+import { ItemTypes } from '../constants/ActionTypes';
 
 //let createHandlers = function(dispatch) {
 //    let onClick = function(node, data) {
@@ -13,6 +15,18 @@ import { connect} from 'react-redux'
 //    };
 //}
 
+const squareTarget = {
+    drop(props) {
+        alert(props.x + " " + props.y);
+    }
+};
+
+function collect(connect, monitor) {
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver()
+    };
+}
 
 class Square extends Component {
     //constructor(props) {
@@ -24,7 +38,7 @@ class Square extends Component {
 
 
     render() {
-        const { x, y, dispatch} = this.props
+        const { x, y, connectDropTarget, dispatch} = this.props
 
         function clickedSquare() {
             var moveArray = [];
@@ -36,7 +50,7 @@ class Square extends Component {
         }
 
 
-        return (
+        return connectDropTarget(
             <div className="squareOuter col-sm-1">
                 <div className="squareInner" onClick={clickedSquare.bind(this)}>
                     {x}, {y}
@@ -59,4 +73,4 @@ class Square extends Component {
 //    };
 //}
 
-export default connect(null, actions)(Square)
+export default connect(null, actions)(DropTarget(ItemTypes.PIECE, squareTarget, collect)(Square))
